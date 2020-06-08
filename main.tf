@@ -52,12 +52,6 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     public_key = var.ssh_key
   }
 
-  custom_data = <<-EOF              
-    #!/bin/bash              
-    echo "Hello, World" > index.html              
-    nohup busybox httpd -f -p 8080 &              
-    EOF
-
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
@@ -69,4 +63,21 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     sku       = "18.04-LTS"
     version   = "latest"
   }
+}
+
+resource "azurerm_virtual_machine_extension" "vmext" {
+    resource_group_name     = azurerm_resource_group.rg.name
+    location                = azurerm_resource_group.rg.location
+    name                    = "vm1-vmext"
+
+    virtual_machine_name = azurerm_linux_virtual_machine.vm1.name
+    publisher            = "Microsoft.Azure.Extensions"
+    type                 = "CustomScript"
+    type_handler_version = "2.0"
+
+    protected_settings = <<PROT
+    {
+        "script": "${base64encode(file(scripts/webserver.sh))}"
+    }
+    PROT
 }
