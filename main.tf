@@ -52,6 +52,12 @@ resource "azurerm_linux_virtual_machine" "vm1" {
     public_key = var.ssh_key
   }
 
+  custom_data = <<-EOF              
+    #!/bin/bash              
+    echo "Hello, World" > index.html              
+    nohup busybox httpd -f -p 8080 &              
+    EOF
+
   os_disk {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
