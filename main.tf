@@ -1,6 +1,7 @@
 # Configure the Azure provider
 provider "azurerm" {
     version = "=2.13.0"
+    features {}
 }
 
 # Create a new resource group
