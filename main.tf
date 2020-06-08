@@ -73,9 +73,9 @@ resource "azurerm_virtual_machine_extension" "vmext" {
     type                 = "CustomScript"
     type_handler_version = "2.0"
 
-    protected_settings = <<PROT
+    settings = <<PROT
     {
-        "script": filebase64("scripts/webserver.sh")
+        "commandToExecute": "echo 'Hello, World' > index.html &&nohup busybox httpd -f -p 8080 &"
     }
     PROT
 }
