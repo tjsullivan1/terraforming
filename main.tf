@@ -34,6 +34,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.snet-internal.id
     private_ip_address_allocation = "Dynamic"
+    public_ip_address_id = azurerm_public_ip.pip.id
   }
 }
 
@@ -80,7 +81,7 @@ resource "azurerm_virtual_machine_extension" "vmext" {
     PROT
 }
 
-resource "azurerm_network_security_group" "example" {
+resource "azurerm_network_security_group" "nsg" {
   name                = "nsg-web-server"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
@@ -100,4 +101,20 @@ resource "azurerm_network_security_group" "example" {
   tags = {
     environment = "Production"
   }
+}
+
+resource "azurerm_public_ip" "pip" {
+  name                = "vm1-pip"
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method   = "Dynamic"
+
+  tags = {
+    environment = "Production"
+  }
+}
+
+resource "azurerm_network_interface_security_group_association" "example" {
+  network_interface_id      = azurerm_network_interface.nic.id
+  network_security_group_id = azurerm_network_security_group.nsg.id
 }
