@@ -1,7 +1,6 @@
 # Configure the Azure provider
 provider "azurerm" {
     version = "=2.13.0"
-    region = "eastus"
     features {}
 }
 
