@@ -66,11 +66,9 @@ resource "azurerm_linux_virtual_machine" "vm1" {
 }
 
 resource "azurerm_virtual_machine_extension" "vmext" {
-    resource_group_name     = azurerm_resource_group.rg.name
-    location                = azurerm_resource_group.rg.location
     name                    = "vm1-vmext"
 
-    virtual_machine_name = azurerm_linux_virtual_machine.vm1.name
+    virtual_machine_id = azurerm_linux_virtual_machine.vm1.id
     publisher            = "Microsoft.Azure.Extensions"
     type                 = "CustomScript"
     type_handler_version = "2.0"
