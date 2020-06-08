@@ -22,7 +22,7 @@ resource "azurerm_subnet" "snet-internal" {
   name                 = "snet-internal"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefix       = "10.0.2.0/24"
+  address_prefixes       = "10.0.2.0/24"
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -44,7 +44,7 @@ resource "azurerm_linux_virtual_machine" "vm1" {
   size                = "Standard_F2"
   admin_username      = "adminuser"
   network_interface_ids = [
-    azurerm_network_interface.example.id,
+    azurerm_network_interface.nic.id,
   ]
 
   admin_ssh_key {
