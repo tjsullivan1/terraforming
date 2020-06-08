@@ -77,7 +77,7 @@ resource "azurerm_virtual_machine_extension" "vmext" {
 
     protected_settings = <<PROT
     {
-        "script": "${base64encode(file("scripts/webserver.sh"))}"
+        "script": filebase64("scripts/webserver.sh")
     }
     PROT
 }
