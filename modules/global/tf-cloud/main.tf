@@ -1,14 +1,3 @@
-terraform {
-  required_providers {
-    tfe = "~> 0.15.1"
-  }
-}
-
-provider "azurerm" {
-  version = "=2.13.0"
-  features {}
-}
-
 data "azurerm_key_vault" "existing" {
   name                = "kv-tjs-01"
   resource_group_name = "rg-development-resources-01"
