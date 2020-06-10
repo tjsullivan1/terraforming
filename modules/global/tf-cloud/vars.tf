@@ -3,7 +3,7 @@ variable "workspace_name" {
  type = string
 }
 
-variable "repo_name" {
+variable "repo_path" {
   description = "The GitHub relative path to the Terraform Repository"
   type = string
 }
