@@ -18,6 +18,7 @@ resource "tfe_workspace" "myws" {
 
   vcs_repo {
     identifier = var.repo_path
+    oauth_token_id = ""
   }
 }
 
