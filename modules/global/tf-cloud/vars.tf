@@ -12,4 +12,3 @@ variable "component_path" {
   description = "The path within the repository where the code is stored for this particular"
   default = "/"
 }
-

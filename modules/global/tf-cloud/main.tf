@@ -8,6 +8,11 @@ data "azurerm_key_vault_secret" "client_secret" {
   key_vault_id = data.azurerm_key_vault.existing.id
 }
 
+data "azurerm_key_vault_secret" "oauth_token_id" {
+  name = "terraform-oauth-token-id"
+  key_vault_id = data.azurerm_key_vault.existing.id
+}
+
 resource "tfe_workspace" "myws" {
   # (resource arguments)
   name         = var.workspace_name
@@ -18,7 +23,7 @@ resource "tfe_workspace" "myws" {
 
   vcs_repo {
     identifier = var.repo_path
-    oauth_token_id = ""
+    oauth_token_id = data.azurerm_key_vault_secret.oauth_token_id
   }
 }
 
