@@ -14,7 +14,7 @@ resource "tfe_workspace" "myws" {
   organization = "tjssullivanent"
 
   working_directory = var.component_path
-  trigger_prefixes = var.component_path
+  trigger_prefixes = [var.component_path]
 
   vcs_repo {
     identifier = var.repo_path
