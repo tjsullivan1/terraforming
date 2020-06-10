@@ -12,6 +12,13 @@ resource "tfe_workspace" "myws" {
   # (resource arguments)
   name         = var.workspace_name
   organization = "tjssullivanent"
+
+  working_directory = var.component_path
+  trigger_prefixes = var.component_path
+
+  vcs_repo {
+    identifier = var.repo_path
+  }
 }
 
 resource "tfe_variable" "client_id" {
