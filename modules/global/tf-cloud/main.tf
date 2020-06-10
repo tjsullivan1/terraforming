@@ -23,7 +23,7 @@ resource "tfe_workspace" "myws" {
 
   vcs_repo {
     identifier = var.repo_path
-    oauth_token_id = data.azurerm_key_vault_secret.oauth_token_id
+    oauth_token_id = data.azurerm_key_vault_secret.oauth_token_id.value
   }
 }
 
