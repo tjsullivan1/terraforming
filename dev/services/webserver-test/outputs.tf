@@ -1,4 +1,4 @@
 output "public_ip" {
-    value = azurerm_public_ip.pip.ip_address
+    value = module.webserver.public_ip
     description = "The public IP address of the web server."
 }
