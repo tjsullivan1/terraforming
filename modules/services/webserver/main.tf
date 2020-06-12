@@ -1,23 +1,23 @@
 
 # Create a new resource group
 resource "azurerm_resource_group" "rg" {
-    name     = "rg-terraform-learning"
-    location = "eastus"
+  name     = "rg-terraform-learning"
+  location = "eastus"
 }
 
 # Create a virtual network
 resource "azurerm_virtual_network" "vnet" {
-    name                = "vnet-tf"
-    address_space       = ["10.0.0.0/16"]
-    location            = azurerm_resource_group.rg.location
-    resource_group_name = azurerm_resource_group.rg.name
+  name                = "vnet-tf"
+  address_space       = ["10.0.0.0/16"]
+  location            = azurerm_resource_group.rg.location
+  resource_group_name = azurerm_resource_group.rg.name
 }
 
 resource "azurerm_subnet" "snet-internal" {
   name                 = "snet-internal"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
-  address_prefixes       = ["10.0.2.0/24"]
+  address_prefixes     = ["10.0.2.0/24"]
 }
 
 resource "azurerm_network_interface" "nic" {
@@ -29,7 +29,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "internal"
     subnet_id                     = azurerm_subnet.snet-internal.id
     private_ip_address_allocation = "Dynamic"
-    public_ip_address_id = azurerm_public_ip.pip.id
+    public_ip_address_id          = azurerm_public_ip.pip.id
   }
 }
 
@@ -62,14 +62,14 @@ resource "azurerm_linux_virtual_machine" "vm1" {
 }
 
 resource "azurerm_virtual_machine_extension" "vmext" {
-    name                    = "vmext-${var.name}"
+  name = "vmext-${var.name}"
 
-    virtual_machine_id = azurerm_linux_virtual_machine.vm1.id
-    publisher            = "Microsoft.Azure.Extensions"
-    type                 = "CustomScript"
-    type_handler_version = "2.0"
+  virtual_machine_id   = azurerm_linux_virtual_machine.vm1.id
+  publisher            = "Microsoft.Azure.Extensions"
+  type                 = "CustomScript"
+  type_handler_version = "2.0"
 
-    settings = <<PROT
+  settings = <<PROT
     {
         "commandToExecute": "echo 'Hello, World' > index.html && nohup busybox httpd -f -p ${var.server_port} &"
     }
@@ -106,6 +106,15 @@ resource "azurerm_public_ip" "pip" {
 
   tags = {
     environment = "Production"
+  }
+
+  dynamic "tag" {
+    for_each = var.custom_tags
+
+    content {
+      key   = tag.key
+      value = tag.value
+    }
   }
 }
 

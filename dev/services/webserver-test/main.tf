@@ -18,4 +18,8 @@ module "webserver" {
   instance_sku = "Standard_F2"
   name = "vm1"
 
+  custom_tags {
+   Owner = "tim Sullivan"
+   DeployedBy = "Terraform" 
+  }
 }
