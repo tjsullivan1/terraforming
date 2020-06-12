@@ -104,9 +104,7 @@ resource "azurerm_public_ip" "pip" {
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Dynamic"
 
-  tags = {
-    var.custom_tags
-  }
+  tags = var.custom_tags
 }
 
 resource "azurerm_network_interface_security_group_association" "vmToNsg" {
