@@ -104,7 +104,7 @@ resource "azurerm_public_ip" "pip" {
   resource_group_name = azurerm_resource_group.rg.name
   allocation_method   = "Dynamic"
 
-  dynamic "tags" {
+  dynamic "tags" = {
     for_each = var.custom_tags
 
     content {
