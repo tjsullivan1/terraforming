@@ -15,11 +15,19 @@ resource "azurerm_app_service_plan" "asp" {
   location            = data.azurerm_resource_group.rg.location
   resource_group_name = data.azurerm_resource_group.rg.name
   kind                = "FunctionApp"
+  reserved = format("%s", var.os) == "linux" ? true : false
 
   sku {
     tier = var.function_tier
     size = var.function_size
   }
+}
+
+resource "azurerm_application_insights" "appin" {
+  name = "appin-${var.name}-${var.env}"
+  location = data.azurerm_resource_group.rg.location
+  resource_group_name = data.azurerm_resource_group.rg.name
+  application_type = "Web"
 }
 
 resource "azurerm_function_app" "function" {
@@ -28,4 +36,5 @@ resource "azurerm_function_app" "function" {
   resource_group_name       = data.azurerm_resource_group.rg.name
   app_service_plan_id       = azurerm_app_service_plan.asp.id
   storage_connection_string = azurerm_storage_account.funcstore.primary_connection_string
+  os_type = var.os
 }

@@ -19,3 +19,9 @@ variable "name" {
 variable "env" {
     description = "An identifier for the environment. d for dev, t for test, p for prod"
 }
+
+variable "os" {
+    type = string
+    description = "Windows or Linux. Defaults to Windows."
+    default = "windows"
+}
