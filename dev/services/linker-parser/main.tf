@@ -4,17 +4,10 @@ provider "azurerm" {
   features {}
 }
 
-# Create a new resource group
-resource "azurerm_resource_group" "rg" {
-  name     = "rg-linker-parser"
-  location = "eastus"
-}
-
 module "webserver" {
   source     = "github.com/tjsullivan1/terraforming/modules/services/az-function"
 
   env                 = "d"
   name                = "linkpar"
-  resource_group_name = azurerm_resource_group.rg.name
-
+  resource_group_name = "rg-linker-parser-d"
 }
