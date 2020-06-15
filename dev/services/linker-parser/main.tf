@@ -5,9 +5,10 @@ provider "azurerm" {
 }
 
 module "webserver" {
-  source     = "github.com/tjsullivan1/terraforming/modules/services/az-function"
+  source = "github.com/tjsullivan1/terraforming/modules/services/az-function"
 
   env                 = "d"
   name                = "linkpar"
   resource_group_name = "rg-linker-parser-d"
+  os                  = "linux"
 }
