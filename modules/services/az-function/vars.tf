@@ -1,3 +1,6 @@
+variable "resource_group_name" {
+    description = "The name for a resource group. This will allow us to get the other attributes necessary."
+}
 
 variable "function_size" {
   description = "The SKU indicating instance size. These can be retrieved by running Get-AzVmSize cmdlet."
