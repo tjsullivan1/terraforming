@@ -10,7 +10,7 @@ terraform {
 
 # Configure the Azure provider
 provider "azurerm" {
-  version = "=2.13.0"
+  version = "= 2.13.0"
   features {}
 }
 
