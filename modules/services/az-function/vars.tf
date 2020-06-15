@@ -1,5 +1,5 @@
 variable "resource_group_name" {
-    description = "The name for a resource group. This will allow us to get the other attributes necessary."
+  description = "The name for a resource group. This will allow us to get the other attributes necessary."
 }
 
 variable "function_size" {
@@ -8,8 +8,8 @@ variable "function_size" {
 }
 
 variable "function_tier" {
-    description = "The tier relating to the SKU of the App Service."
-    default = "Dynamic"
+  description = "The tier relating to the SKU of the App Service."
+  default     = "Dynamic"
 }
 
 variable "name" {
@@ -17,11 +17,11 @@ variable "name" {
 }
 
 variable "env" {
-    description = "An identifier for the environment. d for dev, t for test, p for prod"
+  description = "An identifier for the environment. d for dev, t for test, p for prod"
 }
 
 variable "os" {
-    type = string
-    description = "Windows or Linux. Defaults to Windows."
-    default = "windows"
+  type        = string
+  description = "Windows or Linux. Defaults to Windows."
+  default     = "windows"
 }
