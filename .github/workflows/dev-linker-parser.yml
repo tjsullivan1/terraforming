@@ -5,7 +5,7 @@ on:
     branches:
     - master
     paths:
-      - 'dev/services/linker-parser'
+      - 'dev/services/linker-parser/**'
   pull_request:
 
 jobs:
