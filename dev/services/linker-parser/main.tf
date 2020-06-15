@@ -11,7 +11,6 @@ resource "azurerm_resource_group" "rg" {
 }
 
 module "webserver" {
-  depends_on = [azurerm_resource_group.rg]
   source     = "github.com/tjsullivan1/terraforming/modules/services/az-function"
 
   env                 = "d"
