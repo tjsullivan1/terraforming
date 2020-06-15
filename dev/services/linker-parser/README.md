@@ -1,5 +1,7 @@
 # Linker Parser
 
+![Dev Linker Parser CICD](https://github.com/tjsullivan1/terraforming/workflows/Dev%20Linker%20Parser%20CICD/badge.svg)
+
 This is a shortlinking application sample.
 
 ## Architecture
