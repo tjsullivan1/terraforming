@@ -1,3 +1,13 @@
+terraform {
+  backend "remote" {
+    organization = "tjssullivanent"
+
+    workspaces {
+      name = "dev-linker-parser"
+    }
+  }
+}
+
 # Configure the Azure provider
 provider "azurerm" {
   version = "=2.13.0"
