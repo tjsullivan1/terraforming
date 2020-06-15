@@ -36,13 +36,15 @@ resource "azurerm_function_app" "function_lin" {
   count = (var.os == "linux"
     ? 1
   : 0)
-  
-  name                      = "azfun-${var.name}-${var.env}"
-  location                  = data.azurerm_resource_group.rg.location
-  resource_group_name       = data.azurerm_resource_group.rg.name
-  app_service_plan_id       = azurerm_app_service_plan.asp.id
-  storage_connection_string = azurerm_storage_account.funcstore.primary_connection_string
-  os_type                   = var.os
+
+  name                       = "azfun-${var.name}-${var.env}"
+  location                   = data.azurerm_resource_group.rg.location
+  resource_group_name        = data.azurerm_resource_group.rg.name
+  app_service_plan_id        = azurerm_app_service_plan.asp.id
+  storage_connection_string  = azurerm_storage_account.funcstore.primary_connection_string
+  storage_account_access_key = azurerm_storage_account.funcstore.primary_access_key
+  storage_account_name       = azurerm_storage_account.funcstore.name
+  os_type                    = var.os
 }
 
 resource "azurerm_function_app" "function_win" {
@@ -50,9 +52,11 @@ resource "azurerm_function_app" "function_win" {
     ? 0
   : 1)
 
-  name                      = "azfun-${var.name}-${var.env}"
-  location                  = data.azurerm_resource_group.rg.location
-  resource_group_name       = data.azurerm_resource_group.rg.name
-  app_service_plan_id       = azurerm_app_service_plan.asp.id
-  storage_connection_string = azurerm_storage_account.funcstore.primary_connection_string
+  name                       = "azfun-${var.name}-${var.env}"
+  location                   = data.azurerm_resource_group.rg.location
+  resource_group_name        = data.azurerm_resource_group.rg.name
+  app_service_plan_id        = azurerm_app_service_plan.asp.id
+  storage_connection_string  = azurerm_storage_account.funcstore.primary_connection_string
+  storage_account_access_key = azurerm_storage_account.funcstore.primary_access_key
+  storage_account_name       = azurerm_storage_account.funcstore.name
 }
