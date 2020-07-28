@@ -44,6 +44,7 @@ resource "azurerm_function_app" "function_lin" {
   storage_account_access_key = azurerm_storage_account.funcstore.primary_access_key
   storage_account_name       = azurerm_storage_account.funcstore.name
   os_type                    = var.os
+  version                    = var.function_runtime_version
 
   app_settings = {
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key
@@ -61,6 +62,7 @@ resource "azurerm_function_app" "function_win" {
   app_service_plan_id        = azurerm_app_service_plan.asp.id
   storage_account_access_key = azurerm_storage_account.funcstore.primary_access_key
   storage_account_name       = azurerm_storage_account.funcstore.name
+  version                    = var.function_runtime_version
 
   app_settings = {
     APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key

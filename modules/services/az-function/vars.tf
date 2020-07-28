@@ -25,3 +25,8 @@ variable "os" {
   description = "Windows or Linux. Defaults to Windows."
   default     = "windows"
 }
+
+variable "function_runtime_version" {
+  description = "What is the runtime version we want for this function?"
+  default = "~2"
+}
