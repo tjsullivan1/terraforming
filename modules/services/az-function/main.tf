@@ -47,7 +47,9 @@ resource "azurerm_function_app" "function_lin" {
   version                    = var.function_runtime_version
 
   app_settings = {
-    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key
+    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key,
+    SCM_DO_BUILD_DURING_DEPLOYMENT = "true",
+    ENABLE_ORYX_BUILD = "true"
   }
 }
 
@@ -65,6 +67,8 @@ resource "azurerm_function_app" "function_win" {
   version                    = var.function_runtime_version
 
   app_settings = {
-    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key
+    APPINSIGHTS_INSTRUMENTATIONKEY = azurerm_application_insights.appin.instrumentation_key,
+    SCM_DO_BUILD_DURING_DEPLOYMENT = "true",
+    ENABLE_ORYX_BUILD = "true"
   }
 }
